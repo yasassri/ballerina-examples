@@ -1,0 +1,24 @@
+node {
+    def workspace = pwd()
+    stage('Preparation') {
+        // Clone the examples repository
+        git(
+                branch: 'ci-cd',
+                url: 'https://github.com/yasassri/ballerina-examples.git'
+             )
+        sh 'chmod +x ci-cd/setup-env.sh'
+        sh 'ci-cd/setup-env.sh'
+        sh 'ci-cd/exclude-packages.sh'
+    }
+    stage('Build') {
+        // Run testes
+        dir ('ballerina-examples/examples') {
+            sh "$workspace/tmp/ballerina/bin/ballerina init"
+            sh "$workspace/tmp/ballerina/bin/ballerina test"
+        }
+    }
+    stage('Clean') {
+        sh 'chmod +x build-artefacts/cleanup-env.sh'
+        sh 'build-artefacts/cleanup-env.sh'
+    }
+}
