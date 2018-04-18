@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-GET_DISTRO_FROM_CUSTOM_LOCATION=true
+GET_DISTRO_FROM_CUSTOM_LOCATION=false
 CUSTOM_DISTRO_LOCATION="http://10.100.5.112:8000/ballerina-tools-pack.zip"
 
 # Create a temp directory
